@@ -15,15 +15,23 @@ class ListsController < ApplicationController
     
     if @list.save
       flash[:success] = "List created."
-      redirect_to list_path(@list)
+      respond_with @list, :location => list_path(@list)
+      # or just html redirect_to list_path(@list)
     else
-      #une seule ligne au lieu de deux: le flash est le deuxieme argument 
-      redirect_to new_list_path, :error => "Could not create list"
+      #une seule ligne au lieu de deux: le flash est le deuxieme argument
+      # seul sont disponible :
+      #   - :alert
+      #   - :notice
+      # pour le reste faut passer par le hash
+      # ou une forme plus longue
+      # redirect_to new_list_path, :flash => { :error => "Could not create list"}
+      redirect_to new_list_path, :alert => "Could not create list"
     end
   end
   
   def show
-    @list = List.find(params[:id])
+    respond_with ( @list = List.find(params[:id]) )
+    # or just html @list = List.find(params[:id])
   end
   
   def edit
@@ -34,9 +42,9 @@ class ListsController < ApplicationController
     @list = List.find(params[:id])
     if @list.update_attributes(params[:list])
       flash[:success] = "List updated."
-      redirect_to list_path
+      respond_with @list, :location => list_path(@list)
     else
-      redirect_to edit_list_path, :error => "Could not edit list"
+      redirect_to edit_list_path, :flash => { :error => "Could not edit list" }
     end
   end
   
