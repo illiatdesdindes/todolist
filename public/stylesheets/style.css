@@ -9,3 +9,4 @@
 .info a {color:#205791;}
 
 .button_to, .button_to > * {display:inline;}
+a , a:visited {color:blue}
