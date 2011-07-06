@@ -30,8 +30,10 @@ class ListsController < ApplicationController
   end
   
   def show
-    respond_with ( @list = List.find(params[:id]) )
-    # or just html @list = List.find(params[:id])
+    @list = List.find(params[:id])
+    @task = @list.tasks.new
+    
+    respond_with ( @list )
   end
   
   def edit

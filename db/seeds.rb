@@ -7,3 +7,5 @@
 #   Mayor.create(:name => 'Daley', :city => cities.first)
 
 first_list = List.create(:name => "Home", :description => "Things I have to do  at home.")
+
+first_list.tasks.create(:description => "Buy a doorbell")

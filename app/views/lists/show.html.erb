@@ -1,6 +1,32 @@
 <h2><%= @list.name %></h2>
 <p><%= @list.description %></p>
 
+<h2>Stuff to do</h2>
+<ul>
+  <%@list.tasks.incomplete.each do |task| %>
+    <li>
+      <%= task.description %>
+      - <%= button_to "Complete", complete_task_path(@list, task) %>
+    </li>
+  <%end%>
+</ul>
+
+<h2>Stuff I've done</h2>
+<ul>
+  <%@list.tasks.completed.each do |task| %>
+    <li>
+      <%= task.description %>
+    </li>
+  <%end%>
+</ul>
+
+
+<hr />
+<%= form_for [@list, @task] do |form| %>
+
+  <p><%= form.text_field :description %> <%= form.submit %> </p>
+
+<%end%>
 <hr />
 
 <%= link_to "All Lists", lists_path %>
