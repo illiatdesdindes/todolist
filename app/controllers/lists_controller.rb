@@ -14,7 +14,7 @@ class ListsController < ApplicationController
     @list = List.new(params[:list])
     
     if @list.save
-      flash[:notice] = "List created."
+      flash[:success] = "List created."
       redirect_to list_path(@list)
     else
       #une seule ligne au lieu de deux: le flash est le deuxieme argument 
